@@ -65,7 +65,7 @@ God.watch do |w|
   w.dir = site_root
   w.log = logs[:prex_web]
   w.pid_file = pids[:prex_web]
-  w.start = "bundle exec rails server -d --pid #{pids[:prex_web]}"
+  w.start = "bundle exec rails server -d -p 80 --pid #{pids[:prex_web]}"
   w.stop = "kill $(cat #{pids[:prex_web]})"
   w.behavior(:clean_pid_file)
 
