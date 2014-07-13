@@ -33,9 +33,8 @@ God.watch do |w|
   w.interval = 30.seconds
   w.dir = site_root
   w.log = logs[:prex_workers]
-  # w.pid_file = pids[:prex_workers]
-  # w.start = "bundle exec sidekiq --index 0 --pidfile #{pids[:prex_workers]} --environment development --logfile #{logs[:prex_workers]} --daemon"
-  w.start = "bundle exec sidekiq --index 0 --environment development --logfile #{logs[:prex_workers]} --daemon"
+  w.pid_file = pids[:prex_workers]
+  w.start = "bundle exec sidekiq --index 0 --pidfile #{pids[:prex_workers]} --environment development --logfile #{logs[:prex_workers]} --daemon"
   w.stop = "bundle exec sidekiqctl stop #{pids[:prex_workers]} 5"
   w.behavior(:clean_pid_file)
 
@@ -66,9 +65,8 @@ God.watch do |w|
   w.dir = site_root
   w.log = logs[:prex_web]
   w.pid_file = pids[:prex_web]
-  # w.start = "bundle exec rails server -d -p 80 --pid #{pids[:prex_web]}"
-  w.start = "bundle exec rails server -d -p 80"
-  # w.stop = "kill $(cat #{pids[:prex_web]})"
+  w.start = "bundle exec rails server -d -p 80 --pid #{pids[:prex_web]}"
+  w.stop = "kill $(cat #{pids[:prex_web]})"
   w.behavior(:clean_pid_file)
 
   w.transition(:init, { true => :up, false => :start}) do |on|
