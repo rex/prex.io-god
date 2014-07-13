@@ -9,8 +9,8 @@ pids = {
 }
 
 logs = {
-  :prex_web => "#{apps_root}/prex_site/shared/log/development.log",
-  :prex_workers => "#{apps_root}/prex_site/shared/log/sidekiq.log"
+  :prex_web => "#{apps_root}/prex.io/shared/log/development.log",
+  :prex_workers => "#{apps_root}/prex.io/shared/log/sidekiq.log"
 }
 
 # God.watch do |w|
