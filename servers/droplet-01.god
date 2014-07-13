@@ -34,7 +34,7 @@ God.watch do |w|
   w.dir = site_root
   w.log = logs[:prex_workers]
   w.pid_file = pids[:prex_workers]
-  w.start = "bundle exec sidekiq --index 0 --pidfile #{pids[:prex_workers]} --environment development --logfile #{logs[:prex_workers]} --daemon"
+  w.start = "bundle exec sidekiq --index 0 --pidfile #{pids[:prex_workers]} --environment development --logfile #{logs[:prex_workers]} --daemon -c 5"
   w.stop = "bundle exec sidekiqctl stop #{pids[:prex_workers]} 5"
   w.behavior(:clean_pid_file)
 
