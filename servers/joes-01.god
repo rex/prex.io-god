@@ -2,9 +2,10 @@ apps_root = "/srv"
 pid_root = "#{apps_root}/pids"
 log_root = "#{apps_root}/logs"
 site_root = "#{apps_root}/prex.io/current"
+prex_
 
 pids = {
-  :prex_web => "#{pid_root}/prex_web.pid",
+  :prex_web => "#{apps_root}/prex.io/shared/tmp/pids/prex_site.pid",
   :prex_workers => "#{pid_root}/prex_workers.pid"
 }
 
@@ -50,9 +51,9 @@ God.watch do |w|
   w.interval = 30.seconds
   w.dir = site_root
   w.log = logs[:prex_web]
-  # w.pid_file = pids[:prex_web]
-  w.start = "bundle exec rails server -d -p 3000"
-  # w.stop = "kill $(cat #{pids[:prex_web]})"
+  w.pid_file = pids[:prex_web]
+  w.start = "bundle exec rails server -d -p 3000 --pid #{pids[:prex_web]}"
+  w.stop = "kill $(cat #{pids[:prex_web]})"
   w.behavior(:clean_pid_file)
 
   w.transition(:init, { true => :up, false => :start}) do |on|
