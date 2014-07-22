@@ -1,12 +1,9 @@
 apps_root = "/srv"
-pid_root = "#{apps_root}/pids"
-log_root = "#{apps_root}/logs"
 site_root = "#{apps_root}/prex.io/current"
-prex_
 
 pids = {
   :prex_web => "#{apps_root}/prex.io/shared/tmp/pids/prex_site.pid",
-  :prex_workers => "#{pid_root}/prex_workers.pid"
+  :prex_workers => "#{apps_root}/prex.io/shared/tmp/pids/prex_workers.pid"
 }
 
 logs = {
